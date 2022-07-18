@@ -1,0 +1,841 @@
+
+#############################################################Basic Command##############################################
+> show dbs
+CWABlog  0.000GB
+DBDemo   0.000GB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+
+> use DBDemo
+switched to db DBDemo
+
+db.createCollection("Custom")
+{ ok: 1 }
+
+> show collections
+Demo
+
+db.Demo.insertMany([{'FirstName':'Manish','LastName':'Jha','Email':'manishjha1223@gmail.com','Phone_Number':1234554321,'Country':'Japan'},{'FirstName':'Donald','LastNsme':'Trump','Email':'trumpDonald@gmail.com','Phone_Number':1234565432,'Country':'Peru'}])
+{ acknowledged: true,
+  insertedIds: 
+   { '0': ObjectId("62ccf75e3750d77ddf923489"),
+     '1': ObjectId("62ccf75e3750d77ddf92348a") } }
+
+db.Demo.find().pretty()
+{ _id: ObjectId("62cced02fdbdbfba3e817560"),
+  FirstName: 'Ankush',
+  LastName: 'Rawat',
+  Email: 'ankushrwt344@gmail.com',
+  Phone_Number: 1234567890,
+  Country: 'India' }
+{ _id: ObjectId("62ccf05cfdbdbfba3e817561"),
+  FirstName: 'Jeet',
+  LastName: 'Gour',
+  Email: 'jeetsinghgour123@gmail.com',
+  Phone_Number: 9876543210,
+  Country: 'Denmark' }
+{ _id: ObjectId("62ccf75e3750d77ddf923489"),
+  FirstName: 'Manish',
+  LastName: 'Jha',
+  Email: 'manishjha1223@gmail.com',
+  Phone_Number: 1234554321,
+  Country: 'Japan' }
+{ _id: ObjectId("62ccf75e3750d77ddf92348a"),
+  FirstName: 'Donald',
+  LastNsme: 'Trump',
+  Email: 'trumpDonald@gmail.com',
+  Phone_Number: 1234565432,
+  Country: 'Peru' }
+
+cls //Clear 
+
+db.Demo.find().count()
+4
+
+> db.Demo.find()
+{ "_id" : ObjectId("62cced02fdbdbfba3e817560"), "FirstName" : "Ankush", "LastName" : "Rawat", "Email" : "ankushrwt344@gmail.com", "Phone_Number" : 1234567890, "Country" : "India" }
+{ "_id" : ObjectId("62ccf05cfdbdbfba3e817561"), "FirstName" : "Jeet", "LastName" : "Gour", "Email" : "jeetsinghgour123@gmail.com", "Phone_Number" : NumberLong("9876543210"), "Country" : "Denmark" }
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62cd01d23750d77ddf92348b"), "FirstName" : "Putin", "LastName" : "Arora", "Email" : "putinrussia@gmail.com", "Phone_Number" : 2345678910, "Country" : "Russia", "Salary" : 20, "Id" : 1 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"), "FirstName" : "JaiSalanki", "LastName" : "Jain", "Email" : "jaisalanki12@gmail.com", "Phone_Number" : 9876543212, "Country" : "Ukrain", "Salary" : 10, "Id" : 3 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1f"), "FirstName" : "Biden", "LastName" : "Yadav", "Email" : "bidenUSA@gmail.com", "Country" : "USA", "Salary" : 30, "Id" : 4, "Cont_Number" : 1234567897 }
+>
+
+> db.Demo.find()
+{ "_id" : ObjectId("62cced02fdbdbfba3e817560"), "FirstName" : "Ankush", "LastName" : "Rawat", "Email" : "ankushrwt344@gmail.com", "Phone_Number" : 1234567890, "Country" : "India" }
+{ "_id" : ObjectId("62ccf05cfdbdbfba3e817561"), "FirstName" : "Jeet", "LastName" : "Gour", "Email" : "jeetsinghgour123@gmail.com", "Phone_Number" : NumberLong("9876543210"), "Country" : "Denmark" }
+{ "_id" : ObjectId("62ccf75e3750d77ddf923489"), "FirstName" : "Manish", "LastName" : "Jha", "Email" : "manishjha1223@gmail.com", "Phone_Number" : 1234554321, "Country" : "Japan" }
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1c"), "FirstName" : "Manish", "LastName" : "Jha", "Email" : "manishjha1223@gmail.com", "Phone_Number" : 1234554321, "Country" : "Japan" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+
+db.Demo.remove({FirstName:"Manish"})
+'DeprecationWarning: Collection.remove() is deprecated. Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite.'
+{ acknowledged: true, deletedCount: 2 }
+
+db.Demo.find()
+{ _id: ObjectId("62cced02fdbdbfba3e817560"),
+  FirstName: 'Ankush',
+  LastName: 'Rawat',
+  Email: 'ankushrwt344@gmail.com',
+  Phone_Number: 1234567890,
+  Country: 'India' }
+{ _id: ObjectId("62ccf05cfdbdbfba3e817561"),
+  FirstName: 'Jeet',
+  LastName: 'Gour',
+  Email: 'jeetsinghgour123@gmail.com',
+  Phone_Number: 9876543210,
+  Country: 'Denmark' }
+{ _id: ObjectId("62ccf75e3750d77ddf92348a"),
+  FirstName: 'Donald',
+  LastNsme: 'Trump',
+  Email: 'trumpDonald@gmail.com',
+  Phone_Number: 1234565432,
+  Country: 'Peru' }
+{ _id: ObjectId("62ccfd697e3f0eb6f57d2c1d"),
+  FirstName: 'Donald',
+  LastNsme: 'Trump',
+  Email: 'trumpDonald@gmail.com',
+  Phone_Number: 1234565432,
+  Country: 'Peru' }
+
+db.Demo.find().limit(1)
+{ _id: ObjectId("62cced02fdbdbfba3e817560"),
+  FirstName: 'Ankush',
+  LastName: 'Rawat',
+  Email: 'ankushrwt344@gmail.com',
+  Phone_Number: 1234567890,
+  Country: 'India' }
+
+db.Demo.find({FirstName:'Ankush'})
+{ _id: ObjectId("62cced02fdbdbfba3e817560"),
+  FirstName: 'Ankush',
+  LastName: 'Rawat',
+  Email: 'ankushrwt344@gmail.com',
+  Phone_Number: 1234567890,
+  Country: 'India' }
+
+##################################################################Insert###############################################################################
+
+> db.Demo.insertMany([{"FirstName":"JaiSalanki","LastName":"Jain","Email":"jaisalanki12@gmail.com","Phone_Number":9876543212,"Country":"Ukrain","Salary":10,"Id":3},{"FirstName":"Biden","LastName":"Yadav","Email":"bidenUSA@gmail.com","Phone_Number":1234567897,"Country":"USA","Salary":30,"Id":4}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62cd06227e3f0eb6f57d2c1e"),
+                ObjectId("62cd06227e3f0eb6f57d2c1f")
+        ]
+}
+
+########################################################Find###########################################################################
+
+> db.Demo.find()
+{ "_id" : ObjectId("62cced02fdbdbfba3e817560"), "FirstName" : "Ankush", "LastName" : "Rawat", "Email" : "ankushrwt344@gmail.com", "Phone_Number" : 1234567890, "Country" : "India" }
+{ "_id" : ObjectId("62ccf05cfdbdbfba3e817561"), "FirstName" : "Jeet", "LastName" : "Gour", "Email" : "jeetsinghgour123@gmail.com", "Phone_Number" : NumberLong("9876543210"), "Country" : "Denmark" }
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62cd01d23750d77ddf92348b"), "FirstName" : "Putin", "LastName" : "Arora", "Email" : "putinrussia@gmail.com", "Phone_Number" : 2345678910, "Country" : "Russia", "Salary" : 20, "Id" : 1 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"), "FirstName" : "JaiSalanki", "LastName" : "Jain", "Email" : "jaisalanki12@gmail.com", "Phone_Number" : 9876543212, "Country" : "Ukrain", "Salary" : 10, "Id" : 3 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1f"), "FirstName" : "Biden", "LastName" : "Yadav", "Email" : "bidenUSA@gmail.com", "Phone_Number" : 1234567897, "Country" : "USA", "Salary" : 30, "Id" : 4 }
+
+
+#################################################Update##########################################################################
+
+db.Demo.update({FirstName:"Biden"},{$rename: {Phone_Number:"Cont_Number"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+> db.Demo.find().pretty()
+{
+        "_id" : ObjectId("62cced02fdbdbfba3e817560"),
+        "FirstName" : "Ankush",
+        "LastName" : "Rawat",
+        "Email" : "ankushrwt344@gmail.com",
+        "Phone_Number" : 1234567890,
+        "Country" : "India"
+}
+{
+        "_id" : ObjectId("62ccf05cfdbdbfba3e817561"),
+        "FirstName" : "Jeet",
+        "LastName" : "Gour",
+        "Email" : "jeetsinghgour123@gmail.com",
+        "Phone_Number" : NumberLong("9876543210"),
+        "Country" : "Denmark"
+}
+{
+        "_id" : ObjectId("62ccf75e3750d77ddf92348a"),
+        "FirstName" : "Donald",
+        "LastNsme" : "Trump",
+        "Email" : "trumpDonald@gmail.com",
+        "Phone_Number" : 1234565432,
+        "Country" : "Peru"
+}
+{
+        "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"),
+        "FirstName" : "Donald",
+        "LastNsme" : "Trump",
+        "Email" : "trumpDonald@gmail.com",
+        "Phone_Number" : 1234565432,
+        "Country" : "Peru"
+}
+{
+        "_id" : ObjectId("62cd01d23750d77ddf92348b"),
+        "FirstName" : "Putin",
+        "LastName" : "Arora",
+        "Email" : "putinrussia@gmail.com",
+        "Phone_Number" : 2345678910,
+        "Country" : "Russia",
+        "Salary" : 20,
+        "Id" : 1
+}
+{
+        "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"),
+        "FirstName" : "JaiSalanki",
+        "LastName" : "Jain",
+        "Email" : "jaisalanki12@gmail.com",
+        "Phone_Number" : 9876543212,
+        "Country" : "Ukrain",
+        "Salary" : 10,
+        "Id" : 3
+}
+{
+        "_id" : ObjectId("62cd06227e3f0eb6f57d2c1f"),
+        "FirstName" : "Biden",
+        "LastName" : "Yadav",
+        "Email" : "bidenUSA@gmail.com",
+        "Country" : "USA",
+        "Salary" : 30,
+        "Id" : 4,
+        "Cont_Number" : 1234567897
+}
+
+###################################################Find##################################################
+> db.Demo.find({Id:{$lt:3}}).pretty()
+{
+        "_id" : ObjectId("62cd01d23750d77ddf92348b"),
+        "FirstName" : "Putin",
+        "LastName" : "Arora",
+        "Email" : "putinrussia@gmail.com",
+        "Phone_Number" : 2345678910,
+        "Country" : "Russia",
+        "Salary" : 20,
+        "Id" : 1
+}
+
+> db.Demo.find({Id:{$lte:3}})
+{ "_id" : ObjectId("62cd01d23750d77ddf92348b"), "FirstName" : "Putin", "LastName" : "Arora", "Email" : "putinrussia@gmail.com", "Phone_Number" : 2345678910, "Country" : "Russia", "Salary" : 20, "Id" : 1 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"), "FirstName" : "JaiSalanki", "LastName" : "Jain", "Email" : "jaisalanki12@gmail.com", "Phone_Number" : 9876543212, "Country" : "Ukrain", "Salary" : 10, "Id" : 3 }
+
+> db.Demo.find({Id:{$gt:3}})
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1f"), "FirstName" : "Biden", "LastName" : "Yadav", "Email" : "bidenUSA@gmail.com", "Country" : "USA", "Salary" : 30, "Id" : 4, "Cont_Number" : 1234567897 }
+
+> db.Demo.update({FirstName:"kd"},{"FirstName":"Boris","LastName":"Johnson","Email":"johnsonUK@gmail.com","Cont_Number":1234567893,"Country":"UK","Salary":32,"Id":2},{upsert:true})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : ObjectId("62cd19d9d468ec435b33a3e7")
+})
+
+> db.Demo.find()
+{ "_id" : ObjectId("62cced02fdbdbfba3e817560"), "FirstName" : "Ankush", "LastName" : "Rawat", "Email" : "ankushrwt344@gmail.com", "Phone_Number" : 1234567890, "Country" : "India" }
+{ "_id" : ObjectId("62ccf05cfdbdbfba3e817561"), "FirstName" : "Jeet", "LastName" : "Gour", "Email" : "jeetsinghgour123@gmail.com", "Phone_Number" : NumberLong("9876543210"), "Country" : "Denmark" }
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62cd01d23750d77ddf92348b"), "FirstName" : "Putin", "LastName" : "Arora", "Email" : "putinrussia@gmail.com", "Phone_Number" : 2345678910, "Country" : "Russia", "Salary" : 20, "Id" : 1 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"), "FirstName" : "JaiSalanki", "LastName" : "Jain", "Email" : "jaisalanki12@gmail.com", "Phone_Number" : 9876543212, "Country" : "Ukrain", "Salary" : 10, "Id" : 3 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1f"), "FirstName" : "Biden", "LastName" : "Yadav", "Email" : "bidenUSA@gmail.com", "Country" : "USA", "Salary" : 30, "Id" : 4, "Cont_Number" : 1234567897 }
+{ "_id" : ObjectId("62cd19d9d468ec435b33a3e7"), "FirstName" : "Boris", "LastName" : "Johnson", "Email" : "johnsonUK@gmail.com", "Cont_Number" : 1234567893, "Country" : "UK", "Salary" : 32, "Id" : 2 }
+
+
+ db.training.insertMany([{"Animal":"Dianosore","Name":"Chikara","Dob": new Date(),"Weight":1001},{"Animal":"Scorpion","Name":"Crank","Dob": new Date(),"Weight":1}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62cd20a77e3f0eb6f57d2c21"),
+                ObjectId("62cd20a77e3f0eb6f57d2c22")
+        ]
+}
+
+> db.training.find()
+{ "_id" : ObjectId("62cd1f3a7e3f0eb6f57d2c20"), "Name" : "Panther", "Dob" : ISODate("2022-07-12T07:14:02.528Z"), "Weight" : 5 }
+{ "_id" : ObjectId("62cd20a77e3f0eb6f57d2c21"), "Animal" : "Dianosore", "Name" : "Chikara", "Dob" : ISODate("2022-07-12T07:20:07.236Z"), "Weight" : 1001 }
+{ "_id" : ObjectId("62cd20a77e3f0eb6f57d2c22"), "Animal" : "Scorpion", "Name" : "Crank", "Dob" : ISODate("2022-07-12T07:20:07.236Z"), "Weight" : 1 }
+
+> db.training.remove({Name:"Panther"})
+WriteResult({ "nRemoved" : 1 })
+
+> db.training.find()
+{ "_id" : ObjectId("62cd20a77e3f0eb6f57d2c21"), "Animal" : "Dianosore", "Name" : "Chikara", "Dob" : ISODate("2022-07-12T07:20:07.236Z"), "Weight" : 1001 }
+{ "_id" : ObjectId("62cd20a77e3f0eb6f57d2c22"), "Animal" : "Scorpion", "Name" : "Crank", "Dob" : ISODate("2022-07-12T07:20:07.236Z"), "Weight" : 1 }
+
+> db.training.find({Animal:"Dianosore",Name:"Chikara"})
+{ "_id" : ObjectId("62cd20a77e3f0eb6f57d2c21"), "Animal" : "Dianosore", "Name" : "Chikara", "Dob" : ISODate("2022-07-12T07:20:07.236Z"), "Weight" : 1001 }
+
+> db.training.find().limit(1)
+{ "_id" : ObjectId("62cd20a77e3f0eb6f57d2c21"), "Animal" : "Dianosore", "Name" : "Chikara", "Dob" : ISODate("2022-07-12T07:20:07.236Z"), "Weight" : 1001 }
+
+> db.training.findOne()
+{
+        "_id" : ObjectId("62cd20a77e3f0eb6f57d2c21"),
+        "Animal" : "Dianosore",
+        "Name" : "Chikara",
+        "Dob" : ISODate("2022-07-12T07:20:07.236Z"),
+        "Weight" : 1001
+}
+
+ db.Demo.distinct("FirstName")
+[ "Ankush", "Biden", "Boris", "Donald", "JaiSalanki", "Jeet", "Putin" ]
+
+> db.training.distinct("Animal")
+[ "Dianosore", "Scorpion" ]
+>
+
+> db.training.estimatedDocumentCount()
+2
+
+> db.Demo.estimatedDocumentCount()
+8
+
+> db.Demo.count()
+8
+
+ db.Demo.find({"FirstName":{$nin: ["Boris","Biden"]}})
+{ "_id" : ObjectId("62cced02fdbdbfba3e817560"), "FirstName" : "Ankush", "LastName" : "Rawat", "Email" : "ankushrwt344@gmail.com", "Phone_Number" : 1234567890, "Country" : "India" }
+{ "_id" : ObjectId("62ccf05cfdbdbfba3e817561"), "FirstName" : "Jeet", "LastName" : "Gour", "Email" : "jeetsinghgour123@gmail.com", "Phone_Number" : NumberLong("9876543210"), "Country" : "Denmark" }
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "FirstName" : "Donald", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru", "LastName" : "Trump" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62cd01d23750d77ddf92348b"), "FirstName" : "Putin", "LastName" : "Arora", "Email" : "putinrussia@gmail.com", "Phone_Number" : 2345678910, "Country" : "Russia", "Salary" : 20, "Id" : 1 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"), "FirstName" : "JaiSalanki", "LastName" : "Jain", "Email" : "jaisalanki12@gmail.com", "Phone_Number" : 9876543212, "Country" : "Ukrain", "Salary" : 10, "Id" : 3 }
+
+> db.Demo.find({$nor:[{FirstName:"Ankush"},{LastName:"Gour"}]})
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "FirstName" : "Donald", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru", "LastName" : "Trump" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62cd01d23750d77ddf92348b"), "FirstName" : "Putin", "LastName" : "Arora", "Email" : "putinrussia@gmail.com", "Phone_Number" : 2345678910, "Country" : "Russia", "Salary" : 20, "Id" : 1 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"), "FirstName" : "JaiSalanki", "LastName" : "Jain", "Email" : "jaisalanki12@gmail.com", "Phone_Number" : 9876543212, "Country" : "Ukrain", "Salary" : 10, "Id" : 3 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1f"), "FirstName" : "Biden", "LastName" : "Yadav", "Email" : "bidenUSA@gmail.com", "Country" : "USA", "Salary" : 30, "Id" : 4, "Cont_Number" : 1234567897 }
+{ "_id" : ObjectId("62cd19d9d468ec435b33a3e7"), "FirstName" : "Boris", "LastName" : "Johnson", "Email" : "johnsonUK@gmail.com", "Cont_Number" : 1234567893, "Country" : "UK", "Salary" : 32, "Id" : 2 }
+
+ db.Demo.find({"FirstName":{$in:["Donald","Biden"]}})
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "FirstName" : "Donald", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru", "LastName" : "Trump" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "FirstName" : "Donald", "LastNsme" : "Trump", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru" }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1f"), "FirstName" : "Biden", "LastName" : "Yadav", "Email" : "bidenUSA@gmail.com", "Country" : "USA", "Salary" : 30, "Id" : 4, "Cont_Number" : 1234567897 }
+
+###################################################Update############################################################
+
+> db.Demo.update({FirstName:"Biden"},{$inc:{"Id":5}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+db.Demo.update({_id:ObjectId("62d29b7e7a8d29c7d5f5e77b")},{$set:{"Id":5}}) 
+
+db.Demo.update({"FirstName":"Ankush"},{$set:{Country:"USA",Salary:5}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+> db.Demo.updateMany({FirstName:"Donald"},{$rename:{"LastNsme":"LastName"}})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 1 }
+
+>db.Demo.find({},{"Company.Bridgelab":1})
+{ _id: ObjectId("62cced02fdbdbfba3e817560") }
+{ _id: ObjectId("62ccf05cfdbdbfba3e817561") }
+{ _id: ObjectId("62ccf75e3750d77ddf92348a") }
+{ _id: ObjectId("62ccfd697e3f0eb6f57d2c1d") }
+{ _id: ObjectId("62cd01d23750d77ddf92348b") }
+{ _id: ObjectId("62cd06227e3f0eb6f57d2c1e") }
+{ _id: ObjectId("62cd06227e3f0eb6f57d2c1f") }
+{ _id: ObjectId("62cd19d9d468ec435b33a3e7") }
+{ _id: ObjectId("62d29b7e7a8d29c7d5f5e77b"),
+Company: { Bridgelab: {Name:'MantraLab', HeadQuarter:'Bangalore'}}}
+
+> db.Demo.replaceOne({"FirstName":"Ankush"},{"Name":"JeetSinghGour","Email":"Jeet123@gmail.com"})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+> db.Demo.find({"FirstName":"Donald"},{"_id":0,"Country":1})
+{ "Country" : "Peru" }
+{ "Country" : "Peru" }
+
+> db.Demo.find({"FirstName":"Donald"},{"Country":1})
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "Country" : "Peru" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "Country" : "Peru" }
+>
+ db.Demo.find().sort({"FirstName":-1})
+{ "_id" : ObjectId("62cd01d23750d77ddf92348b"), "FirstName" : "Putin", "LastName" : "Arora", "Email" : "putinrussia@gmail.com", "Phone_Number" : 2345678910, "Country" : "Russia", "Salary" : 20, "Id" : 1 }
+{ "_id" : ObjectId("62ccf05cfdbdbfba3e817561"), "FirstName" : "Jeet", "LastName" : "Gour", "Email" : "jeetsinghgour123@gmail.com", "Phone_Number" : NumberLong("9876543210"), "Country" : "Denmark" }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"), "FirstName" : "JaiSalanki", "LastName" : "Jain", "Email" : "jaisalanki12@gmail.com", "Phone_Number" : 9876543212, "Country" : "Ukrain", "Salary" : 10, "Id" : 3 }
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "FirstName" : "Donald", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru", "LastName" : "Trump" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "FirstName" : "Donald", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru", "LastName" : "Trump" }
+{ "_id" : ObjectId("62cd19d9d468ec435b33a3e7"), "FirstName" : "Boris", "LastName" : "Johnson", "Email" : "johnsonUK@gmail.com", "Cont_Number" : 1234567893, "Country" : "UK", "Salary" : 32, "Id" : 2 }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1f"), "FirstName" : "Biden", "LastName" : "Yadav", "Email" : "bidenUSA@gmail.com", "Country" : "USA", "Salary" : 30, "Id" : 9, "Cont_Number" : 1234567897 }
+{ "_id" : ObjectId("62cced02fdbdbfba3e817560"), "Name" : "JeetSinghGour", "Email" : "Jeet123@gmail.com" }
+
+> db.Demo.find().sort({"FirstName":1})
+{ "_id" : ObjectId("62cced02fdbdbfba3e817560"), "Name" : "JeetSinghGour", "Email" : "Jeet123@gmail.com" }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1f"), "FirstName" : "Biden", "LastName" : "Yadav", "Email" : "bidenUSA@gmail.com", "Country" : "USA", "Salary" : 30, "Id" : 9, "Cont_Number" : 1234567897 }
+{ "_id" : ObjectId("62cd19d9d468ec435b33a3e7"), "FirstName" : "Boris", "LastName" : "Johnson", "Email" : "johnsonUK@gmail.com", "Cont_Number" : 1234567893, "Country" : "UK", "Salary" : 32, "Id" : 2 }
+{ "_id" : ObjectId("62ccf75e3750d77ddf92348a"), "FirstName" : "Donald", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru", "LastName" : "Trump" }
+{ "_id" : ObjectId("62ccfd697e3f0eb6f57d2c1d"), "FirstName" : "Donald", "Email" : "trumpDonald@gmail.com", "Phone_Number" : 1234565432, "Country" : "Peru", "LastName" : "Trump" }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"), "FirstName" : "JaiSalanki", "LastName" : "Jain", "Email" : "jaisalanki12@gmail.com", "Phone_Number" : 9876543212, "Country" : "Ukrain", "Salary" : 10, "Id" : 3 }
+{ "_id" : ObjectId("62ccf05cfdbdbfba3e817561"), "FirstName" : "Jeet", "LastName" : "Gour", "Email" : "jeetsinghgour123@gmail.com", "Phone_Number" : NumberLong("9876543210"), "Country" : "Denmark" }
+{ "_id" : ObjectId("62cd01d23750d77ddf92348b"), "FirstName" : "Putin", "LastName" : "Arora", "Email" : "putinrussia@gmail.com", "Phone_Number" : 2345678910, "Country" : "Russia", "Salary" : 20, "Id" : 1 }
+
+ db.Demo.find().skip(7)
+{ "_id" : ObjectId("62cd19d9d468ec435b33a3e7"), "FirstName" : "Boris", "LastName" : "Johnson", "Email" : "johnsonUK@gmail.com", "Cont_Number" : 1234567893, "Country" : "UK", "Salary" : 32, "Id" : 2 }
+
+> db.Demo.find().sort({"FirstName":-1}).skip(1).limit(2)
+{ "_id" : ObjectId("62ccf05cfdbdbfba3e817561"), "FirstName" : "Jeet", "LastName" : "Gour", "Email" : "jeetsinghgour123@gmail.com", "Phone_Number" : NumberLong("9876543210"), "Country" : "Denmark" }
+{ "_id" : ObjectId("62cd06227e3f0eb6f57d2c1e"), "FirstName" : "JaiSalanki", "LastName" : "Jain", "Email" : "jaisalanki12@gmail.com", "Phone_Number" : 9876543212, "Country" : "Ukrain", "Salary" : 10, "Id" : 3 }
+
+
+Query Document.............................................................................................................
+
+
+ db.Demo.count({"Id":3})
+1
+
+db.training.insertMany({"title":"MongoDb_Training","description":"WebApi_MongoDB_Html_Javascript_Css","Mentor":"Priyanshu","Url":"Udemy","Tags":["aggregate","Index","Crud"],"likes":100},{"title":"Mvc_training","description":"Mvc_HtMl_Css_JavaScript","Mentor":"Nibedita","Url":"Udemy","Tags":["javascript","Css","Mvc","Html"],"likes":100})
+
+##########################################################################Aggregation####################################
+
+db.training.aggregate([{$group:{_id: "$Mentor",MentorBatch_count:{$sum:1}}}])
+{ _id: 'Manish', MentorBatch_count: 3 }
+{ _id: 'Sagir', MentorBatch_count: 1 }
+{ _id: 'Harry', MentorBatch_count: 1 }
+{ _id: 'Vishal', MentorBatch_count: 1 }
+{ _id: 'Himanshu', MentorBatch_count: 1 }
+
+db.training.aggregate([{$group:{_id:"$Mentor",num_Batch:{$avg:"$likes"}}}])
+{ _id: 'Manish', num_Batch: 50 }
+{ _id: 'Harry', num_Batch: 100 }
+{ _id: 'Vishal', num_Batch: 100 }
+{ _id: 'Himanshu', num_Batch: 80 }
+{ _id: 'Sagir', num_Batch: 90 }
+
+db.training.aggregate([{$group:{_id:"$Mentor",Num_count:{$min:"$likes"}}}])
+{ _id: 'Manish', Num_count: 5 }
+{ _id: 'Harry', Num_count: 100 }
+{ _id: 'Vishal', Num_count: 100 }
+{ _id: 'Himanshu', Num_count: 80 }
+{ _id: 'Sagir', Num_count: 90 }
+
+db.training.aggregate([{$group:{_id:"$Mentor",num_Count:{$max:"$likes"}}}])
+{ _id: 'Harry', num_Count: 100 }
+{ _id: 'Vishal', num_Count: 100 }
+{ _id: 'Himanshu', num_Count: 80 }
+{ _id: 'Manish', num_Count: 95 }
+{ _id: 'Sagir', num_Count: 90 }
+
+db.training.aggregate([{$group:{_id:"$Mentor",firstUrl:{$first:"$Url"}}}])
+{ _id: 'Vishal', firstUrl: 'Udemy' }
+{ _id: 'Himanshu', firstUrl: 'Udemy' }
+{ _id: 'Sagir', firstUrl: 'Udemy' }
+{ _id: 'Manish', firstUrl: null }
+{ _id: 'Harry', firstUrl: 'Udemy' }
+
+db.training.aggregate([{$group:{_id:"$Mentor",lastUrl:{$last:"$Url"}}}])
+{ _id: 'Manish', lastUrl: null }
+{ _id: 'Harry', lastUrl: 'Udemy' }
+{ _id: 'Vishal', lastUrl: 'Udemy' }
+{ _id: 'Himanshu', lastUrl: 'Udemy' }
+{ _id: 'Sagir', lastUrl: 'Udemy' }
+
+db.training.aggregate([{$group:{_id:"$Mentor"}},{$sort:{"Title":-1}},{$limit:6}])
+{ _id: 'Manish' }
+{ _id: 'Harry' }
+{ _id: 'Vishal' }
+{ _id: 'Himanshu' }
+{ _id: 'Sagir' }
+
+#####################################################Index#########################################################
+
+db.training.ensureIndex({"Mentor":1})
+[ 'Mentor_1' ]
+
+db.training.ensureIndex({"Url":1})
+[ 'Url_1' ]
+
+##############################################################find#########################################################
+
+db.getCollection('training').find()
+{ _id: ObjectId("62cfb912ccc656a297c580a2"),
+  Tags: [ 'aggregate', 'Index', 'Crud' ],
+  Mentor: 'Manish',
+  likes: 40,
+  Url: 'Youtube' }
+{ _id: ObjectId("62cfb954ccc656a297c580a3"),
+  title: 'MongoDb_Training',
+  description: 'WebApi_MongoDB_Html_Javascript_Css',
+  Mentor: 'Harry',
+  Url: 'Udemy',
+  Tags: [ 'aggregate', 'Index', 'Crud' ],
+  likes: 100 }
+{ _id: ObjectId("62cfb9b3ccc656a297c580a4"),
+  title: 'Mvc_training',
+  description: 'Mvc_HtMl_Css_JavaScript',
+  Mentor: 'Vishal',
+  Url: 'Udemy',
+  Tags: [ 'javascript', 'Css', 'Mvc', 'Html' ],
+  likes: 100 }
+{ _id: ObjectId("62cfba0bccc656a297c580a5"),
+  title: 'Devops',
+  description: 'Devops',
+  Mentor: 'Himanshu',
+  Url: 'Udemy',
+  Tags: [ 'Devops', 'Index', 'Crud' ],
+  likes: 80 }
+{ _id: ObjectId("62cfba4dccc656a297c580a6"),
+  title: 'MachineLearning',
+  description: 'Python_Machinelearning',
+  Mentor: 'Sagir',
+  Url: 'Udemy',
+  Tags: [ 'MachineLearning', 'AI', 'Python' ],
+  likes: 90 }
+{ _id: ObjectId("62cfbaa4ccc656a297c580a7"),
+  title: 'React',
+  description: 'Mvc_react',
+  Mentor: 'Manish',
+  Url: 'Udemy',
+  Tags: [ 'React', 'Mvc', 'Javascript' ],
+  likes: 95 }
+{ _id: '62cfb912ccc656a297c580a2', Mentor: 'Manish', likes: 5 }
+
+##############################################################Filter######################################################
+db.training.find({},{_id:0,Mentor:1})
+{ Mentor: 'Manish' }
+{ Mentor: 'Harry' }
+{ Mentor: 'Vishal' }
+{ Mentor: 'Himanshu' }
+{ Mentor: 'Sagir' }
+{ Mentor: 'Manish' }
+{ Mentor: 'Manish' }
+
+db.training.update({"Mentor":"Sagir"},{$set:{"Company":{"location":{"Country":"Usa","address":"Newyork"},"Product":{"Tesla":"Automobile","Spacex":"Spaceexploration"}}}})
+
+
+db.training.find({},{"Company.Product":1})
+{ _id: ObjectId("62cfb912ccc656a297c580a2") }
+{ _id: ObjectId("62cfb954ccc656a297c580a3") }
+{ _id: ObjectId("62cfb9b3ccc656a297c580a4") }
+{ _id: ObjectId("62cfba0bccc656a297c580a5") }
+{ _id: ObjectId("62cfba4dccc656a297c580a6"),
+  Company: { Product: { Tesla: 'Automobile', Spacex: 'Spaceexploration' } } }
+{ _id: ObjectId("62cfbaa4ccc656a297c580a7") }
+{ _id: '62cfb912ccc656a297c580a2' }
+
+db.training.find({},{"Company.location":1})
+{ _id: ObjectId("62cfb912ccc656a297c580a2") }
+{ _id: ObjectId("62cfb954ccc656a297c580a3") }
+{ _id: ObjectId("62cfb9b3ccc656a297c580a4") }
+{ _id: ObjectId("62cfba0bccc656a297c580a5") }
+{ _id: ObjectId("62cfba4dccc656a297c580a6"),
+  Company: { location: { Country: 'Usa', address: 'Newyork' } } }
+{ _id: ObjectId("62cfbaa4ccc656a297c580a7") }
+{ _id: '62cfb912ccc656a297c580a2' }
+
+db.training.find({},{"Mentor":1})
+{ _id: ObjectId("62cfb912ccc656a297c580a2"), Mentor: 'Manish' }
+{ _id: ObjectId("62cfb954ccc656a297c580a3"), Mentor: 'Harry' }
+{ _id: ObjectId("62cfb9b3ccc656a297c580a4"), Mentor: 'Vishal' }
+{ _id: ObjectId("62cfba0bccc656a297c580a5"),
+  Mentor: 'Himanshu' }
+{ _id: ObjectId("62cfba4dccc656a297c580a6"), Mentor: 'Sagir' }
+{ _id: ObjectId("62cfbaa4ccc656a297c580a7"), Mentor: 'Manish' }
+{ _id: '62cfb912ccc656a297c580a2', Mentor: 'Manish' }
+
+
+#########################################################Other Collection Functions###########################################################################
+
+db.Demo.getIndexKeys()
+[ { _id: 1 } ]
+
+db.Demo.totalSize()
+73728
+
+db.Demo.getIndexes()
+[ { v: 2, key: { _id: 1 }, name: '_id_' } ]
+
+
+######################################################CreateUser#########################################################################
+
+ db.createUser({user:"Ankush",pwd:"@Ankush",roles:[{role:"readWrite",db:"DelhiPg"}]})
+Successfully added user: {
+        "user" : "Ankush",
+        "roles" : [
+                {
+                        "role" : "readWrite",
+                        "db" : "DelhiPg"
+                }
+        ]
+
+ show users
+{
+        "_id" : "DelhiPg.Ankush",
+        "userId" : UUID("4b088bb1-192b-471d-9717-d3ba42fcafa5"),
+        "user" : "Ankush",
+        "db" : "DelhiPg",
+        "roles" : [
+                {
+                        "role" : "readWrite",
+                        "db" : "DelhiPg"
+                }
+        ],
+        "mechanisms" : [
+                "SCRAM-SHA-1",
+                "SCRAM-SHA-256"
+        ]
+}
+> show roles
+{
+        "role" : "userAdmin",
+        "db" : "DelhiPg",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "dbOwner",
+        "db" : "DelhiPg",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "dbAdmin",
+        "db" : "DelhiPg",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "enableSharding",
+        "db" : "DelhiPg",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "read",
+        "db" : "DelhiPg",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "readWrite",
+        "db" : "DelhiPg",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+>
+*****************************Replication******************************************************************************
+
+Create data folder in c drive 
+create rs1,rs2,rs3 subfolder in data folder
+
+path for bin folder type in Command Prompt.......................
+cd c:\Program Files\MongoDB\Server\5.0\bin
+
+present in bin folder in commandprompt Type these commands
+
+step-1
+start mongod --replSet "ankush" -logpath \data\rs1\1.log --dbpath \data\rs1 --port 27018
+start mongod --replSet "ankush" -logpath \data\rs2\2.log --dbpath \data\rs2 --port 27019
+start mongod --replSet "ankush" -logpath \data\rs3\3.log --dbpath \data\rs3 --port 27020
+
+step-2
+Connect to 27018.......................
+mongo --port 27018
+
+step-3
+For configuration..........................
+> config={_id:"ankush",members:[{_id:0,host:"localhost:27018"},{_id:1,host:"localhost:27019"},{_id:2,host:"localhost:27020"}]};
+
+step-4
+rs.initiate(config)
+
+step-5
+rs.status()
+
+step-6
+show dbs
+Use Ankushdb
+db.createCollection("Student")
+db.Student.insert({"name":"From PrimaryServer 27018"})
+
+
+#Now Go For Another Command Prompt for Connecting Port 27019 Secondary Server
+
+path for bin folder type in Command Prompt.......................
+cd c:\Program Files\MongoDB\Server\5.0\bin
+
+present in bin folder in commandprompt Type these commands
+
+step-1
+mongo --port 27019
+
+step-2
+rs.slaveOk()
+
+step-3
+rs.status()
+
+step-4
+show dbs
+use Ankushdb
+show collections
+db.Students.find()
+
+
+#Now Go For Another Command Prompt for Connecting Port 27020 Secondary Server
+
+path for bin folder type in Command Prompt.......................
+cd c:\Program Files\MongoDB\Server\5.0\bin
+
+present in bin folder in commandprompt Type these commands
+
+step-1
+mongo --port 27020
+
+step-2
+rs.slaveOk()
+
+step-3
+rs.status()
+
+step-4
+show dbs
+use Ankushdb
+show collections
+db.Students.find()
+
+
+#Now to make primary Server to go down
+
+step-1
+Go to Primary Server 27018 Command Prompt
+
+step-2
+show dbs
+
+step-3
+use admin
+
+step-4
+db.shutdownServer()
+
+step-5
+Go to Command prompt Secondary Server 27019
+use ankushdb
+db.Student.find()
+Now secondary server would have shifted to Primary server
+
+step-6
+db.Student.insert({"name":"From new Primary Server"})
+
+
+
+#############################################sharding#####################################################################################################
+
+Create data folder in c drive 
+create rs1,rs2,rs3,shard subfolder in data folder
+create s0,s1,s2 subfolder in shard folder
+create log subfolder in s0,s1,s2 folders
+
+path for bin folder type in Command Prompt.......................
+cd c:\Program Files\MongoDB\Server\5.0\bin
+
+present in bin folder in commandprompt Type these commands
+
+step-1
+creating config server and it's replica server........
+start mongod --configsvr --replSet "test5" -logpath \data5\rs1\1.log --dbpath \data3\rs1 --port 2030
+start mongod --configsvr --replSet "test5" -logpath \data5\rs2\2.log --dbpath \data3\rs2 --port 2031
+start mongod --configsvr --replSet "test5" -logpath \data5\rs3\3.log --dbpath \data3\rs3 --port 2032
+
+step-2
+Connect to 2030.......................
+mongo --port 2030
+
+step-3
+For configuration..........................
+> config={_id:"test2",members:[{_id:0,host:"localhost:2030"},{_id:1,host:"localhost:2031"},{_id:2,host:"localhost:2032"}]}
+
+step-4
+rs.initiate(config)
+
+step-5
+rs.status()
+
+step-6
+creating 3 shard server.........
+start mongod --shardsvr --replSet "test5" -logpath \data5\shard\s0\log\s0.log --dbpath \data5\shard\s0 --port 20020
+start mongod --shardsvr --replSet "test5" -logpath \data5\shard\s1\log\s1.log --dbpath \data5\shard\s1 --port 20021
+start mongod --shardsvr --replSet "test5" -logpath \data5\shard\s2\log\s2.log --dbpath \data5\shard\s2 --port 20022
+
+step-7
+Connect to one member of the shard replica set.........
+mongo --port 20020
+
+step-8
+Initiate the replica set..............
+
+config={_id:"test5",members:[{_id:0,host:"localhost:20020"},{_id:1,host:"localhost:20021"},{_id:2,host:"localhost:20022"}]}
+
+
+rs.initiate(config)
+
+step-9 
+go to bin folder location in commandpromt
+start a routing server(20023) to help config server(say port-2030)
+start mongos --port 20023 --configdb test5/localhost:2030,localhost:2031,localhost:2032
+
+step-10
+connect {routing server } to mongos running on port 20023
+mongo --port 20023
+
+step-11
+add shard first server to the routing server........
+sh.addShard( "test5/localhost:20020,localhost:20021,localhost:20022")
+
+step-12
+enable sharding
+sh.enableSharding("AnkuDb")
+
+
+step-13
+ sh.shardCollection("AnkuDb.employee",{"emp_id":"hashed"})
+
+step-14
+mongos> use AnkurDb
+switched to db AnkurDb
+mongos> show collections
+employee
+
+step-15 
+inserting document in employee collections........
+for(i=1;i<=10000,i++){
+ db.employee.insert({emp_id:i,type:"fulltime"});
+}
+
+step-16
+db.employee.getShardDistribution()
+
+check status
+sh.status()
+
+############################**Authorization & Role**###########################################################
+
+step-1
+create User
+db.createUser({user:"Anku",pwd:"prithvi",roles:[{role:"read",db:"Pg"}]})
+
+step:2
+Enable authorization
+open mongod configure file then write
+
+security:
+  authorization:enabled
+
+step:3
+
+Authentication User
+
